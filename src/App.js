@@ -9,13 +9,14 @@ import {
 } from "@material-ui/core";
 import { ListPeople } from "./components/ListPeople";
 import { FormFiltres } from "./components/FormFilters";
+import { NoPeople } from "./components/NoPeople";
 import { getPeople } from "./store/actions/peopleAction";
 
 function App() {
   const [peopleData, setPeopleData] = useState([]);
   const dispatch = useDispatch();
   const { people, loading, error } = useSelector((state) => state.peopleList);
-  const { peopleFiltered, male, female } = useSelector(
+  const { peopleFiltered, male, female, age } = useSelector(
     (state) => state.filteredData
   );
 
@@ -28,20 +29,27 @@ function App() {
   }, [people]);
 
   useEffect(() => {
-    if (male && female) {
-      setPeopleData(people);
-    } else {
-      if (male) {
-        setPeopleData(peopleFiltered);
-      } else {
-        if (female) {
-          setPeopleData(peopleFiltered);
-        } else {
-          setPeopleData(people);
-        }
-      }
-    }
-  }, [people, peopleFiltered, male, female]);
+    // if (male && female) {
+    //   setPeopleData(people);
+    // } else {
+    //   if (male) {
+    //     setPeopleData(peopleFiltered);
+    //   } else {
+    //     if (female) {
+    //       setPeopleData(peopleFiltered);
+    //     } else {
+    //       setPeopleData(people);
+    //     }
+    //   }
+    // }
+    setPeopleData(peopleFiltered);
+    console.log("f", peopleFiltered);
+    // if(age) {
+    //   setPeopleData(peopleFiltered);
+    // } else {
+    //   setPeopleData(people);
+    // }
+  }, [peopleFiltered]);
 
   if (loading) {
     return (
@@ -66,8 +74,11 @@ function App() {
   return (
     <>
       <FormFiltres />
-
-      {peopleData && <ListPeople peopleData={peopleData} />}
+      {peopleData.length === 0 ? (
+        <NoPeople />
+      ) : (
+        peopleData && <ListPeople peopleData={peopleData} />
+      )}
     </>
   );
 }

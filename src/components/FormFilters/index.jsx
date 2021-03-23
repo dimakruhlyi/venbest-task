@@ -1,28 +1,42 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStyles } from "./useStyles";
 import { Box, TextField, Typography, Checkbox } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { filterMale, filterFemale } from "../../store/actions/filterAction";
+import {
+  filterMale,
+  filterFemale,
+  filterAge,
+  filterName,
+  filterLastName,
+} from "../../store/actions/filterAction";
 
 export const FormFiltres = () => {
   const classes = useStyles();
+  const [filterArr, setFilterArr] = useState([]);
   const { people } = useSelector((state) => state.peopleList);
   //   const { peopleFiltered, male, female } = useSelector(
   //     (state) => state.filteredData
   //   );
   const dispatch = useDispatch();
-  //const checkRef = useRef();
 
   const handleChangeMale = (event) => {
     dispatch(filterMale(people, event.target.checked));
-    //console.log(checkRef.current.children[0].children[0].checked);
   };
 
   const handleChangeFemale = (event) => {
     dispatch(filterFemale(people, event.target.checked));
   };
 
-  const hadleAge = () => {};
+  const hadleTextFilter = (e) => {
+    dispatch(filterAge(people, e.target.value));
+  };
+
+  const handleNameFilter = (e) => {
+    dispatch(filterName(people, e.target.value));
+  };
+  const handleLastNameFilter = (e) => {
+    dispatch(filterLastName(people, e.target.value));
+  };
 
   return (
     <>
@@ -34,13 +48,21 @@ export const FormFiltres = () => {
           <Typography variant="body1" align="center" className={classes.inline}>
             Имя:
           </Typography>
-          <TextField label="Имя..." className={classes.textItem} />
+          <TextField
+            label="Имя..."
+            className={classes.textItem}
+            onChange={(e) => handleNameFilter(e)}
+          />
         </Box>
         <Box className={classes.textBlock}>
           <Typography variant="body1" align="center" className={classes.inline}>
             Фамилия:
           </Typography>
-          <TextField label="Фамилия..." className={classes.textItem} />
+          <TextField
+            label="Фамилия..."
+            className={classes.textItem}
+            onChange={(e) => handleLastNameFilter(e)}
+          />
         </Box>
         <Box className={classes.textBlock}>
           <Typography variant="body1" align="center" className={classes.inline}>
@@ -48,8 +70,10 @@ export const FormFiltres = () => {
           </Typography>
           <TextField
             label="Возраст..."
+            type="number"
+            min="0"
             className={classes.textItem}
-            onKeyPress={hadleAge}
+            onChange={(e) => hadleTextFilter(e)}
           />
         </Box>
         <Box className={classes.textBlock}>
@@ -58,12 +82,7 @@ export const FormFiltres = () => {
           </Typography>
           <Typography className={`${classes.checkboxItem} ${classes.textItem}`}>
             м: <Checkbox color="default" onChange={handleChangeMale} />
-            ж:{" "}
-            <Checkbox
-              color="default"
-              //ref={checkRef}
-              onChange={handleChangeFemale}
-            />
+            ж: <Checkbox color="default" onChange={handleChangeFemale} />
           </Typography>
         </Box>
       </form>
