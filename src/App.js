@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import classes from "./App.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CircularProgress,
+  Card,
+  Typography,
+  CardContent,
+} from "@material-ui/core";
+import { ListPeople } from "./components/ListPeople";
+import { getPeople } from "./store/actions/peopleAction";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const dispatch = useDispatch();
+  const { people, loading, error } = useSelector((state) => state.peopleList);
+
+  useEffect(() => {
+    dispatch(getPeople());
+  }, [dispatch]);
+
+  if (loading) {
+    return (
+      <div className={classes.loaderCenter}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card>
+        <CardContent>
+          <Typography variant="h5" component="h2" align="center">
+            {error.message}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return <>{people && <ListPeople peopleData={people} />}</>;
 }
 
 export default App;
