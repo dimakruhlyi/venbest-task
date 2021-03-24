@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+## Venbest task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![projectimg](https://i.ibb.co/Y8jp7Sy/venbest.jpg)
+## Архитектура приложения
 
-## Available Scripts
+Приложение разработано с помощью библиотеки *React*. Для управления состоянием приложения был выбран *Redux* и библиотека middlewares - *Redux-Thunk*. В качестве библиотеки для UI была выбрана *Material UI*.
 
-In the project directory, you can run:
+Приложение состоит из двух директорий: *public* и *src* и файла пакетного менеджера - package.json.
 
-### `yarn start`
+В папке public хранится index.html, favicon.ico, manifest.json и логотипы.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+В папке scr находится главная точка входа в приложение - index.js в котором находятся все главные подключения системы: подключение store, инициализация UI библиотеки и так же App.js.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Так же папка src имеет 2 директории: components и store.
 
-### `yarn test`
+В директории ***components*** находятся компоненты системы: FormFilters, ListPeople, NoPeople.
+#### FormFilters
+Отвечает за блок контента, где рассположены поля для фильтрации данных. Поля делятся на текстовые (фильтр по имени, фамилию и возрасту) и чекбоксы (фильтр за полом человека).
+#### ListPeople
+Компонент отвечает за отображение списка людей, в которые входят такие параметры, как Имя, Фамилия, Возраст и Пол.
+#### NoPeople
+Компонент отвечает за отображение для юзера того, что людей на найдено.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+В директории ***store*** находится все состояние приложения. В этой директории есть свои поддиректории: ***actions*** с экшенами системы и  ***reducer*** с редьюсерами. Так же есть файл index.js с инициализацией стора приложения и комбайн редьюсером и файл types со всеми типами.
 
-### `yarn build`
+# Установка приложения локально
+1. Требуется локально установленный nodejs последней версии. Скачать можно по ссылке. (https://nodejs.org/uk/ "Ссылка на загрузку Node.js");
+2. Установить git и зарегистрироватся в github.
+3. Клонировать проект: в удобном месте прописать команду *git clone https://github.com/dimakruhlyi/venbest-task.git*.
+4. После клонирования зайти в папку с приложением: *cd venbest-task*.
+5. В терминале ввести *npm install* либо *yarn install*.
+6. После завершения установки ввести в терминале *npm run start* либо *yarn start*.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Задеплоиная версия на ***Google Firebase*** (https://venbesttask.web.app/)
