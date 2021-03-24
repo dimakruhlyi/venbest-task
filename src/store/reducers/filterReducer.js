@@ -56,7 +56,6 @@ export const filterReducer = (state = initialState, action) => {
       };
     case TYPES.FILTER_AGE:
       let age = action.age;
-      console.log("reducer", age);
       let filteredAge = action.payload.filter((el) => {
         return JSON.stringify(el.age) === age;
       });

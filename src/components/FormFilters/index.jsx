@@ -27,7 +27,7 @@ export const FormFiltres = () => {
     dispatch(filterFemale(people, event.target.checked));
   };
 
-  const hadleTextFilter = (e) => {
+  const hadleAgeFilter = (e) => {
     dispatch(filterAge(people, e.target.value));
   };
 
@@ -73,7 +73,7 @@ export const FormFiltres = () => {
             type="number"
             min="0"
             className={classes.textItem}
-            onChange={(e) => hadleTextFilter(e)}
+            onChange={(e) => hadleAgeFilter(e)}
           />
         </Box>
         <Box className={classes.textBlock}>
