@@ -1,41 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useStyles } from "./useStyles";
 import { Box, TextField, Typography, Checkbox } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  filterMale,
-  filterFemale,
   filterAge,
   filterName,
   filterLastName,
+  filterSex,
 } from "../../store/actions/filterAction";
 
 export const FormFiltres = () => {
   const classes = useStyles();
-  const [filterArr, setFilterArr] = useState([]);
   const { people } = useSelector((state) => state.peopleList);
-  //   const { peopleFiltered, male, female } = useSelector(
-  //     (state) => state.filteredData
-  //   );
+  const maleRef = useRef();
+  const femaleRef = useRef();
+    const { peopleFiltered, name } = useSelector(
+      (state) => state.filteredData
+    );
   const dispatch = useDispatch();
 
-  const handleChangeMale = (event) => {
-    dispatch(filterMale(people, event.target.checked));
+  const handleChangeSex = () => {
+    let maleChecked = maleRef.current.children[0].children[0].checked;
+    let femaleChecked = femaleRef.current.children[0].children[0].checked;
+
+    if (maleChecked === true && femaleChecked === false) {
+      dispatch(filterSex(people, "m"));
+    }
+    if (maleChecked === false && femaleChecked === true) {
+      dispatch(filterSex(people, "f"));
+    }
+    if (
+      (maleChecked === true && femaleChecked === true) ||
+      (maleChecked === false && femaleChecked === false)
+    ) {
+      dispatch(filterSex(people, "b"));
+    }
   };
 
-  const handleChangeFemale = (event) => {
-    dispatch(filterFemale(people, event.target.checked));
+  const handleNameFilter = (event) => {
+    // if(sex) {
+    //   dispatch(filterName(peopleFiltered, event.target.value));
+    // } else {
+      dispatch(filterName(people, event.target.value));
+    
   };
 
-  const hadleAgeFilter = (e) => {
-    dispatch(filterAge(people, e.target.value));
+  const handleLastNameFilter = (event) => {
+    if(name) {
+      dispatch(filterLastName(peopleFiltered, event.target.value));
+    } else {
+      dispatch(filterLastName(people, event.target.value));
+    }
+ 
   };
 
-  const handleNameFilter = (e) => {
-    dispatch(filterName(people, e.target.value));
-  };
-  const handleLastNameFilter = (e) => {
-    dispatch(filterLastName(people, e.target.value));
+  const hadleAgeFilter = (event) => {
+    dispatch(filterAge(people, event.target.value));
   };
 
   return (
@@ -81,8 +101,18 @@ export const FormFiltres = () => {
             Пол:
           </Typography>
           <Typography className={`${classes.checkboxItem} ${classes.textItem}`}>
-            м: <Checkbox color="default" onChange={handleChangeMale} />
-            ж: <Checkbox color="default" onChange={handleChangeFemale} />
+            м:{" "}
+            <Checkbox
+              color="default"
+              ref={maleRef}
+              onChange={handleChangeSex}
+            />
+            ж:{" "}
+            <Checkbox
+              color="default"
+              ref={femaleRef}
+              onChange={handleChangeSex}
+            />
           </Typography>
         </Box>
       </form>

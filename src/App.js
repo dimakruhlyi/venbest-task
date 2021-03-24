@@ -16,7 +16,7 @@ function App() {
   const [peopleData, setPeopleData] = useState([]);
   const dispatch = useDispatch();
   const { people, loading, error } = useSelector((state) => state.peopleList);
-  const { peopleFiltered, male, female, age } = useSelector(
+  const { peopleFiltered, sex } = useSelector(
     (state) => state.filteredData
   );
 
@@ -29,27 +29,8 @@ function App() {
   }, [people]);
 
   useEffect(() => {
-    // if (male && female) {
-    //   setPeopleData(people);
-    // } else {
-    //   if (male) {
-    //     setPeopleData(peopleFiltered);
-    //   } else {
-    //     if (female) {
-    //       setPeopleData(peopleFiltered);
-    //     } else {
-    //       setPeopleData(people);
-    //     }
-    //   }
-    // }
     setPeopleData(peopleFiltered);
-    console.log("f", peopleFiltered);
-    // if(age) {
-    //   setPeopleData(peopleFiltered);
-    // } else {
-    //   setPeopleData(people);
-    // }
-  }, [peopleFiltered]);
+  }, [peopleFiltered, sex]);
 
   if (loading) {
     return (

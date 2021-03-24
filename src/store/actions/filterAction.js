@@ -1,17 +1,10 @@
 import * as TYPES from "../types";
 
-export const filterMale = (people, value) => {
+export const filterSex = (people, value) => {
   return {
-    type: TYPES.FILTER_MALE,
+    type: TYPES.FILTER_SEX,
     payload: people,
-    male: value,
-  };
-};
-export const filterFemale = (people, value) => {
-  return {
-    type: TYPES.FILTER_FEMALE,
-    payload: people,
-    female: value,
+    sex: value,
   };
 };
 export const filterAge = (people, value) => {
