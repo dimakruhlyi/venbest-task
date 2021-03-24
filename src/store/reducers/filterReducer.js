@@ -2,8 +2,6 @@ import * as TYPES from "../types";
 
 const initialState = {
   peopleFiltered: [],
-  sex: "",
-  name: ''
 };
 
 export const filterReducer = (state = initialState, action) => {
@@ -23,7 +21,6 @@ export const filterReducer = (state = initialState, action) => {
       return {
         ...state,
         peopleFiltered: filteredSex,
-        sex: sexPar,
       };
     case TYPES.FILTER_NAME:
       let name = action.name;
@@ -33,7 +30,6 @@ export const filterReducer = (state = initialState, action) => {
       return {
         ...state,
         peopleFiltered: filteredNames,
-        name: name
       };
     case TYPES.FILTER_LASTNAME:
       let lastname = action.lastname;

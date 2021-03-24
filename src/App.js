@@ -16,9 +16,7 @@ function App() {
   const [peopleData, setPeopleData] = useState([]);
   const dispatch = useDispatch();
   const { people, loading, error } = useSelector((state) => state.peopleList);
-  const { peopleFiltered, sex } = useSelector(
-    (state) => state.filteredData
-  );
+  const { peopleFiltered } = useSelector((state) => state.filteredData);
 
   useEffect(() => {
     dispatch(getPeople());
@@ -30,7 +28,7 @@ function App() {
 
   useEffect(() => {
     setPeopleData(peopleFiltered);
-  }, [peopleFiltered, sex]);
+  }, [peopleFiltered]);
 
   if (loading) {
     return (

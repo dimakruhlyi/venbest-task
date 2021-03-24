@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useStyles } from "./useStyles";
 import { Box, TextField, Typography, Checkbox } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,9 +14,6 @@ export const FormFiltres = () => {
   const { people } = useSelector((state) => state.peopleList);
   const maleRef = useRef();
   const femaleRef = useRef();
-    const { peopleFiltered, name } = useSelector(
-      (state) => state.filteredData
-    );
   const dispatch = useDispatch();
 
   const handleChangeSex = () => {
@@ -38,20 +35,11 @@ export const FormFiltres = () => {
   };
 
   const handleNameFilter = (event) => {
-    // if(sex) {
-    //   dispatch(filterName(peopleFiltered, event.target.value));
-    // } else {
-      dispatch(filterName(people, event.target.value));
-    
+    dispatch(filterName(people, event.target.value));
   };
 
   const handleLastNameFilter = (event) => {
-    if(name) {
-      dispatch(filterLastName(peopleFiltered, event.target.value));
-    } else {
-      dispatch(filterLastName(people, event.target.value));
-    }
- 
+    dispatch(filterLastName(people, event.target.value));
   };
 
   const hadleAgeFilter = (event) => {
